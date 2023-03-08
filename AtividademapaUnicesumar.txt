@@ -9,13 +9,13 @@ Inicio
 
       Escreva("Digite a  media de litros por Km")
         Leia(mediaLts)   
-      Escreva("Digite a capacidade m·xima em litros do tanque")
+      Escreva("Digite a capacidade m√°xima em litros do tanque")
         Leia(tanqueLts)
-      Escreva("Digite a quantidade de quilÙmetros do trecho planejado")
+      Escreva("Digite a quantidade de quil√¥metros do trecho planejado")
         Leia(Km)
-      Escreva("Digite a quantidade de quilÙmetros do trecho alternativo")
+      Escreva("Digite a quantidade de quil√¥metros do trecho alternativo")
         Leia(Km_Alternativo)
-      Escreva("Digite a quantidade de combustÌvel j· na aeronave")
+      Escreva("Digite a quantidade de combust√≠vel j√° na aeronave")
         Leia(combustivel_na_aeronave)
            trecho_total <- Km + Km_Alternativo
 
@@ -54,11 +54,11 @@ Var
       
 Inicio
       
-      Escreva(Km"Esta È a quantidade de Km do trecho planejado")
-      Escreva(Km_Alternativo"Esta È a quantidade de Km do trecho alternativo")
-      Escreva(trecho_total_margem"Esta È quantidade de Km total com a margem de seguranÁa")
-      Escreva("A quantidade de combustivel necess·ria para o voo È de"resultado1"litros por Km")
-      Esreva("A quantidade de combustivel para abastecimento È de"resultado2"litros)
+      Escreva(Km"Esta √© a quantidade de Km do trecho planejado")
+      Escreva(Km_Alternativo"Esta √© a quantidade de Km do trecho alternativo")
+      Escreva(trecho_total_margem"Esta √© quantidade de Km total com a margem de seguran√ßa")
+      Escreva("A quantidade de combustivel necess√°ria para o voo √© de"resultado1"litros por Km")
+      Esreva("A quantidade de combustivel para abastecimento √© de"resultado2"litros)
 
 Fim
    
