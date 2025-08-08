@@ -1,0 +1,246 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+#include <ctype.h>
+
+#define TAM 14
+#define MAX_SEQUENCIAS 50
+
+struct No {
+    char sequencia[TAM];
+    struct No* proximo;
+};
+
+typedef struct No* ptr_no;
+typedef struct No* lista;
+
+struct Pilha {
+    char sequencia[TAM];
+    struct Pilha* proximo;
+};
+
+typedef struct Pilha* ptr_pilha;
+
+// Funções
+void inserir_fila(lista* inicio);
+int excluir_fila(lista* inicio);
+void imprimir_fila(lista inicio);
+ptr_pilha criar_pilha();
+void inserir_pilha(ptr_pilha* topo, char* sequencia);
+void imprimir_pilha(ptr_pilha topo);
+char complementoDNA(char nucleotideo);
+int validaSequencia(char* seq);
+
+int main() {
+    setlocale(LC_ALL, "Portuguese");
+
+    lista fila = NULL;
+    ptr_pilha pilha = criar_pilha();
+
+    int opcao;
+    int total_sequencias = 0;
+
+    do {
+        printf("\nOpções:\n");
+        printf("1. Inserir sequência na fila\n");
+        printf("2. Excluir sequência da fila\n");
+        printf("3. Imprimir fila\n");
+        printf("4. Converter sequências e inserir na pilha\n");
+        printf("5. Imprimir pilha\n");
+        printf("0. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                if (total_sequencias < MAX_SEQUENCIAS) {
+                    inserir_fila(&fila);
+                    total_sequencias++;
+                } else {
+                    printf("Limite de sequências atingido.\n");
+                }
+                break;
+            case 2:
+                if (excluir_fila(&fila)) {
+                    total_sequencias--;
+                }
+                break;
+            case 3:
+                imprimir_fila(fila);
+                break;
+            case 4:
+                if (total_sequencias > 0) {
+                    lista temp = fila;
+                    while (temp != NULL) {
+                        inserir_pilha(&pilha, temp->sequencia);
+                        temp = temp->proximo;
+                    }
+                } else {
+                    printf("A fila está vazia. Insira sequências na fila primeiro.\n");
+                }
+                break;
+            case 5:
+                imprimir_pilha(pilha);
+                break;
+            case 0:
+                printf("Encerrando o programa...\n");
+                break;
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+        }
+
+    } while (opcao != 0);
+
+    // Libera memória da fila
+    lista temp = fila;
+    while (temp != NULL) {
+        lista proximo = temp->proximo;
+        free(temp);
+        temp = proximo;
+    }
+
+    // Libera memória da pilha
+    ptr_pilha temp_pilha = pilha;
+    while (temp_pilha != NULL) {
+        ptr_pilha proximo_pilha = temp_pilha->proximo;
+        free(temp_pilha);
+        temp_pilha = proximo_pilha;
+    }
+
+    return 0;
+}
+
+void inserir_fila(lista* inicio) {
+    char sequencia[TAM];
+
+    printf("Digite a sequência: ");
+    scanf("%s", sequencia);
+
+    if (!validaSequencia(sequencia)) {
+        printf("Sequência inválida. Use apenas A, T, C, G.\n");
+        return;
+    }
+
+    lista novo_no = malloc(sizeof(struct No));
+    strcpy(novo_no->sequencia, sequencia);
+    novo_no->proximo = NULL;
+
+    if (*inicio == NULL) {
+        *inicio = novo_no;
+    } else {
+        lista temp = *inicio;
+        while (temp->proximo != NULL) {
+            temp = temp->proximo;
+        }
+        temp->proximo = novo_no;
+    }
+
+    printf("Sequência inserida na fila.\n");
+}
+
+int excluir_fila(lista* inicio) {
+    if (*inicio == NULL) {
+        printf("A fila está vazia.\n");
+        return 0;
+    }
+
+    char sequencia_exl[TAM];
+    printf("Digite a sequência a ser excluída: ");
+    scanf("%s", sequencia_exl);
+
+    lista temp = *inicio;
+    lista anterior = NULL;
+
+    while (temp != NULL) {
+        if (strcmp(temp->sequencia, sequencia_exl) == 0) {
+            if (anterior == NULL) {
+                *inicio = temp->proximo;
+            } else {
+                anterior->proximo = temp->proximo;
+            }
+
+            free(temp);
+            printf("Sequência excluída: %s\n", sequencia_exl);
+            return 1;
+        }
+
+        anterior = temp;
+        temp = temp->proximo;
+    }
+
+    printf("Sequência não encontrada na fila.\n");
+    return 0;
+}
+
+void imprimir_fila(lista inicio) {
+    if (inicio == NULL) {
+        printf("A fila está vazia.\n");
+        return;
+    }
+
+    printf("Sequências na fila:\n");
+    while (inicio != NULL) {
+        printf("%s\n", inicio->sequencia);
+        inicio = inicio->proximo;
+    }
+}
+
+ptr_pilha criar_pilha() {
+    return NULL;
+}
+
+void inserir_pilha(ptr_pilha* topo, char* sequencia) {
+    int len = strlen(sequencia);
+    char sequencia_convertida[TAM];
+
+    for (int i = 0; i < len; i++) {
+        sequencia_convertida[i] = complementoDNA(sequencia[i]);
+    }
+    sequencia_convertida[len] = '\0';
+
+    ptr_pilha novo_no = malloc(sizeof(struct Pilha));
+    strcpy(novo_no->sequencia, sequencia_convertida);
+    novo_no->proximo = *topo;
+    *topo = novo_no;
+
+    printf("Sequência convertida inserida na pilha.\n");
+}
+
+void imprimir_pilha(ptr_pilha topo) {
+    if (topo == NULL) {
+        printf("A pilha está vazia.\n");
+        return;
+    }
+
+    printf("Sequências na pilha:\n");
+    while (topo != NULL) {
+        printf("%s\n", topo->sequencia);
+        topo = topo->proximo;
+    }
+}
+
+char complementoDNA(char nucleotideo) {
+    switch (toupper(nucleotideo)) {
+        case 'A':
+            return 'T';
+        case 'T':
+            return 'A';
+        case 'C':
+            return 'G';
+        case 'G':
+            return 'C';
+        default:
+            return nucleotideo;
+    }
+}
+
+int validaSequencia(char* seq) {
+    for (int i = 0; seq[i] != '\0'; i++) {
+        char c = toupper(seq[i]);
+        if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
+            return 0;
+        }
+    }
+    return 1;
+}
