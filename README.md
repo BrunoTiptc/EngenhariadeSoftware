@@ -9,49 +9,44 @@
 
 ### 🎯 Objetivo
 
-Este repositório reúne trabalhos, diagramas, projetos e atividades que desenvolvi **inspirado pelas disciplinas da graduação** em Engenharia de Software.  
+Este repositório reúne trabalhos, diagramas, projetos e atividades que desenvolvi inspirado pelas disciplinas da graduação em Engenharia de Software.  
 É uma forma de consolidar meu aprendizado e manter um histórico organizado e versionado.
 
 ---
 
 ### 📁 Conteúdo Previsto
 
-#### ✅ Diagramas de Engenharia de Software
-- Casos de uso
-- Diagrama de classes
-- Diagrama de sequência
-- EER (Entidade-Relacionamento Estendido)
-- Fluxogramas
+#### ✅ Planilha (pasta Docs/)
+- Orçamento Intel x AMD (`Docs/Orçamento_Intel_x_AMD.xlsx`)
 
-#### ✅ Trabalhos Acadêmicos
-- Modelagem de requisitos
-- Documentos `.docx`, `.md` e `.pdf`
-- Planilhas e relatórios auxiliares
-- Trabalhos interdisciplinares (Empreendedorismo, Cloud, Ética etc.)
-
-#### ✅ Projetos Inspirados
-- Protótipos simples baseados nas disciplinas
-- Algoritmos, interfaces e sistemas de apoio
+#### ✅ Diagramas e Documentos (na raiz e outras pastas)
+- Diagrama de Classes (arquivo JPG)
+- Diagrama de Comunicação (arquivo JPG)
+- Diagrama de Atividades (arquivo PNG)
+- Diagrama de Estados (arquivo PNG)
+- Diagrama de Sequência (arquivo PNG)
+- Diagrama EER Banco de Dados MySQL Workbench (arquivo PNG)
+- Trabalhos acadêmicos em `.docx`, `.md`, `.pdf`
 
 ---
 
-### 🧰 Ferramentas Utilizadas
+### 📂 Estrutura Simplificada do Repositório
 
-- Draw.io / diagrams.net
-- Word / LibreOffice
-- VS Code
-- Qt Designer / Figma (para protótipos)
-- Git & GitHub (para versionamento e organização)
-
----
-
-### 👨‍🎓 Sobre o autor
-
-Sou [**Bruno César**](https://github.com/BrunoTiptc), estudante de Engenharia de Software na **Unicesumar**, apaixonado por tecnologia, QA, algoritmos e projetos que resolvem problemas reais.  
-Este repositório é parte do meu compromisso em levar meus estudos a sério e transformar teoria em prática.
-
----
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=BrunoTiptc&color=blue" alt="Profile views"/>
-</p>
+```plaintext
+EngenhariaDeSoftware/
+│
+├── Docs/
+│   └── Orçamento_Intel_x_AMD.xlsx
+│
+├── Diagrama de Classes.jpg
+├── Diagrama de Comunicação.jpg
+├── Diagrama de atividades.png
+├── Diagrama de estados.png
+├── Diagrama de sequencia.png
+├── DiagramaEER Banco de Dados MySQL Workbanch.png
+├── Trabalhos/
+│   ├── Modelagem_de_requisitos.docx
+│   ├── Plano_de_projeto.md
+│   └── Relatório_empreendedorismo.pdf
+├── README.md
+└── Outros arquivos e pastas conforme o desenvolvimento
